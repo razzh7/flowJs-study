@@ -25,7 +25,7 @@ function returnType(value1: number, value2: string): string {
 returnType(1,'2')
 
 /**
- * 1.4 混合类型
+ * 1.4 函数规定类型的三种形式
  * 1、参数类型单一
  * 2、参数可能有多种类型
  * 3、有时候不确定参数的类型,但又想要参数类型和函数返回类型保持一致,那么就要使用(泛型 generics)
@@ -142,7 +142,7 @@ function fn(cb: (string, boolean | void, Array<number>) => string) {
 fn((...args) => { return args[0] })('I am ra', true, [520,521])
 
 /** 
- * 2.1 对象语法 
+ * 2.1 对象写法
  * https://flow.org/en/docs/types/objects/#toc-object-type-syntax
  * */
 let obj1: { foo: boolean } = { foo: false } // Work!
