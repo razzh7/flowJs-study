@@ -179,3 +179,51 @@ let b = {
 }
 // b.foo = () => { return 2; } // Error!
 // b.foo = 'razzh' // Error
+
+// object methods
+function objMethod(obj: {}) {}
+objMethod({name: 'ff', age: 19})
+// Object是any的别名Object is an alias to any
+function objMethod2(obj: Object) {
+  obj = 10;
+}
+objMethod2({ baz: 3.14, bar: "hello" })
+
+/**
+ * 2.2 接口类型(Interface Tyeps)
+ * https://flow.org/en/docs/types/interfaces/
+ */
+class Foo5 {
+  serialize() { return '[Foo]'; }
+}
+
+class Bar5 {
+  serialize() { return '[Bar]'; }
+}
+
+// // $ExpectError
+// const foo: Foo = new Bar(); // Error!
+	
+interface Serializable {
+  serialize(): string
+}
+
+class G1 {
+  serialize() { return '[G1]' }
+}
+
+class G2 {
+  serialize() { return '[G2]' }
+}
+
+const G3: Serializable = new G1()
+const G4: Serializable = new G2()
+
+/** 
+ * 全局类型
+ * https://flow.org/en/docs/libdefs/creation/
+ */
+
+function gblTest(Vue: PI) {}
+
+gblTest(123)
