@@ -219,11 +219,49 @@ class G2 {
 const G3: Serializable = new G1()
 const G4: Serializable = new G2()
 
+
+interface MyInterface<A, B, C> {
+  foo: A;
+  bar: B;
+  baz: C;
+}
+// foo、bar、baz都必须要有
+var value1: MyInterface<number, boolean, string> = {
+  foo: 1,
+  bar: true,
+  baz: 'three',
+}; // Work!
+
+var value2: MyInterface<number, boolean, string> = {
+  foo: 1,
+  bar: true,
+  name: { age:18 }, // Work!
+  baz: 'three',
+};
+
+// var val: MyInterface<number, boolean, string> = {
+//   foo: 1,
+//   baz: 'three',
+// }; // Error!
 /** 
- * 全局类型
+ * 2.3 全局类型 配合接口类型(interface)
  * https://flow.org/en/docs/libdefs/creation/
  */
+let nums = 1234
+function gblTest(Vue: GlobalAPI) {}
+gblTest({name: 'razzh', extend:(nums) => {
+  let a = 1 + nums
+  return a
+}})
 
-function gblTest(Vue: PI) {}
-
-gblTest(123)
+/**
+ * 2.4 泛型(Generics)
+ * 函数的参数被约定为泛型后不能被修改,返回值必须的原泛型值
+ */
+// https://flow.org/en/docs/types/generics/#toc-generics-track-values-around
+let ui = function<T>(options: T): T {
+  // let a = options + 'ff' // Error
+  // return a // Error
+  return options // Works!
+}
+ui<string>('gg') // Error
